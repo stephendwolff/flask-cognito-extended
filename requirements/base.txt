@@ -1,0 +1,6 @@
+# move from Pipend to standard pip requirements file
+Flask
+requests
+python-jose[cryptography]
+PyJWT
+
