@@ -177,7 +177,6 @@ def _exchange_and_load_tokens():
     _load_user(decoded_id_token[cognito_config.identity_claim_key])
 
 
-
 def _decode_verify_callback_request():
     if has_authorization_state():
         if 'state' not in request.args:
@@ -201,7 +200,6 @@ def _decode_jwt_from_headers():
 
     # Make sure the header is in a valid format that we are expecting, ie
     # <HeaderName>: <HeaderType(optional)> <JWT>
-    jwt_header = None
 
     # Check if header is comma delimited, ie
     # <HeaderName>: <field> <value>, <field> <value>, etc...

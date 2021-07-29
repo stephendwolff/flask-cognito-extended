@@ -158,7 +158,7 @@ class CognitoManager(object):
         """
 
         # Where to look for the JWT. Available options are cookies or headers
-        app.config.setdefault('EXEMPT_METHODS', {"OPTIONS",})
+        app.config.setdefault('EXEMPT_METHODS', {"OPTIONS", })
 
         # Where to look for the JWT. Available options are cookies or headers
         app.config.setdefault('JWT_TOKEN_LOCATION', ('headers',))
@@ -200,9 +200,9 @@ class CognitoManager(object):
 
         # How long an a token will live before they expire.
         app.config.setdefault('JWT_ACCESS_TOKEN_EXPIRES',
-                                datetime.timedelta(minutes=60))
+                              datetime.timedelta(minutes=60))
         app.config.setdefault('JWT_REFRESH_TOKEN_EXPIRES',
-                                datetime.timedelta(days=30))
+                              datetime.timedelta(days=30))
 
         # Options for blacklisting/revoking tokens
         app.config.setdefault('JWT_BLACKLIST_ENABLED', False)

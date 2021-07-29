@@ -1,7 +1,7 @@
 from flask_cognito_extended.config import cognito_config
 from datetime import timedelta
 import pytest
-from hashlib import md5
+
 
 def test_default_configs(app):
     """
@@ -10,7 +10,7 @@ def test_default_configs(app):
     Then check the default config properties
     """
     with app.test_request_context():
-        assert cognito_config.exempt_methods == {"OPTIONS",}
+        assert cognito_config.exempt_methods == {"OPTIONS", }
         assert cognito_config.token_location == ('headers',)
         assert cognito_config.jwt_in_query_string is False
         assert cognito_config.jwt_in_cookies is False
@@ -61,6 +61,7 @@ def test_default_configs(app):
 
         assert cognito_config.error_msg_key == 'msg'
 
+
 def test_tokens_never_expire(app):
     with app.test_request_context():
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
@@ -69,6 +70,7 @@ def test_tokens_never_expire(app):
         assert cognito_config.access_expires is False
         assert cognito_config.refresh_expires is False
 
+
 def test_tokens_with_int_values(app):
     with app.test_request_context():
         app.config['JWT_ACCESS_TOKEN_EXPIRES'] = 300
@@ -76,6 +78,7 @@ def test_tokens_with_int_values(app):
         
         assert cognito_config.access_expires == timedelta(minutes=5)
         assert cognito_config.refresh_expires == timedelta(days=5)
+
 
 def test_invalid_config_options(app):
     with app.test_request_context():
@@ -167,6 +170,7 @@ def test_invalid_config_options(app):
         with pytest.raises(RuntimeError):
             cognito_config.scope
 
+
 def test_jwt_token_locations_config(app):
     with app.test_request_context():
         allowed_locations = ('headers', 'cookies', 'query_string', 'json')
@@ -191,6 +195,7 @@ def test_jwt_token_locations_config(app):
         ):
             app.config['JWT_TOKEN_LOCATION'] = locations
             assert cognito_config.token_location == locations
+
 
 def test_jwt_blacklist_token_checks_config(app):
     with app.test_request_context():
@@ -217,6 +222,7 @@ def test_jwt_blacklist_token_checks_config(app):
             app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = token_types
             assert cognito_config.blacklist_checks == token_types
 
+
 def test_csrf_protect_config(app):
     with app.test_request_context():
         app.config['JWT_TOKEN_LOCATION'] = ['headers']
@@ -230,6 +236,7 @@ def test_csrf_protect_config(app):
         app.config['JWT_TOKEN_LOCATION'] = ['cookies']
         app.config['JWT_COOKIE_CSRF_PROTECT'] = False
         assert cognito_config.csrf_protect is False
+
 
 def test_cognito_config(app):
     with app.test_request_context():

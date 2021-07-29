@@ -46,6 +46,8 @@ and to consider tokens that aren't in the blacklist
 just two options, and this can be tailored to whatever
 your application needs.
 """
+
+
 @cognito.token_in_blacklist_loader
 def check_if_token_in_blacklist(decrypted_token):
     jti = decrypted_token['jti']
@@ -82,6 +84,8 @@ Read more:
 https://docs.aws.amazon.com/cognito/latest/developerguide/logout-endpoint.html
 https://github.com/aws-amplify/amplify-js/issues/3435
 """
+
+
 @app.route('/logout', methods=['GET'])
 @jwt_required
 def logout():
@@ -89,15 +93,19 @@ def logout():
     blacklist.add(jti)
     return redirect(get_logout_uri())
 
+
 """
 Redirect endpoint from logging out from cognito.
 Unsets the access token from cookies
 """
+
+
 @app.route('/logout-redirect', methods=['GET'])
 def logout_redirect():
     res = make_response(jsonify(msg="You have logged out."))
     unset_access_cookies(response=res)
     return res
+
 
 # logged out users cannot access this endpoint
 @app.route('/protected', methods=['GET'])

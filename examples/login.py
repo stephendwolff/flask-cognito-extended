@@ -17,6 +17,7 @@ app.config['COGNITO_SIGNOUT_URI'] = "https://yourdomainhere/logout-redirect"
 
 cognito = CognitoManager(app)
 
+
 # Use @login_handler decorator on your login route
 @app.route('/login', methods=['POST'])
 @login_handler
