@@ -1,6 +1,6 @@
 # move from Pipend to standard pip requirements file
-Flask
-requests
+Flask==1.1.3
+requests==2.27.1
 python-jose[cryptography]
 PyJWT
 
