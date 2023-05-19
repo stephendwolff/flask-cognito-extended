@@ -29,7 +29,7 @@ setup(
     zip_safe=False,
     platforms='any',
     install_requires=[
-        'Flask>=1.0,<2.0',
+        'Flask>=2.0,<3.0',
         'python-jose[cryptography]>=3.1.0',
         'PyJWT>=1.7,<2.0',
         'requests>=2.9.1,<3.0.0'
