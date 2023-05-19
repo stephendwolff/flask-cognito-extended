@@ -1,7 +1,7 @@
+import hmac
 import time
 from jose import jwk, jwt
 from jose.utils import base64url_decode
-from werkzeug.security import safe_str_cmp
 from flask_cognito_extended.exceptions import CSRFError, JWTDecodeError
 from jwt import ExpiredSignatureError
 try:
@@ -75,6 +75,16 @@ def decode_jwt(encoded_token, secret, identity_claim_key,
     if csrf_value:
         if 'csrf' not in data:
             raise JWTDecodeError("Missing claim: csrf")
-        if not safe_str_cmp(data['csrf'], csrf_value):
+
+        a = data['csrf']
+        b = csrf_value
+
+        if isinstance(a, str):
+            a = a.encode("utf-8")  # type: ignore
+
+        if isinstance(b, str):
+            b = b.encode("utf-8")  # type: ignore
+
+        if not hmac.compare_digest(a, b):
             raise CSRFError("CSRF double submit tokens do not match")
     return data
